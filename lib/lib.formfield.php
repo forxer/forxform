@@ -17,11 +17,11 @@
  * @author			Vincent Garnier
  * @copyright		2008 Vincent Garnier
  * @version 		$Revision$
- * @date				$Date$
+ * @date			$Date$
  * @editor			$Author$
  * @filesource
  */
-class form
+class formField
 {
 	/**
 	 * Retourne l'identifiant et le nom du champ en
