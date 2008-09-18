@@ -2,10 +2,10 @@
 
 = Utilisation de base =
 
-* Inclusion des fichiers requis
-* Instanciation de la classe
-* Peuplement du formulaire
-* Affichage 
+  * Inclusion des fichiers requis
+  * Instanciation de la classe
+  * Peuplement du formulaire
+  * Affichage 
 
 
 == Inclusion des fichiers requis ==
