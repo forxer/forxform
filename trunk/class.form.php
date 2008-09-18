@@ -39,22 +39,6 @@ class form extends forxForm implements iRenderForxForm
 		$this->setRenderer('form');
 	}
 
-	public static function handleOptions($params,&$nid,&$name,&$id,&$label,&$value,&$default,&$desc,&$class,&$tabindex,&$required,&$disabled,&$extra_html)
-	{
-		$name = isset($params['name']) ? $params['name'] : '';
-		$id = isset($params['id']) ? $params['id'] : '';
-		$nid = array($name,$id);
-		$label = isset($params['label']) ? $params['label'] : '';
-		$value = isset($params['value']) ? $params['value'] : '';
-		$default = isset($params['default']) ? $params['default'] : '';
-		$desc = isset($params['desc']) ? $params['desc'] : '';
-		$class = isset($params['class']) ? $params['class'] : '';
-		$tabindex = isset($params['tabindex']) ? (integer)$params['tabindex'] : '';
-		$required = isset($params['required']) ? (boolean)$params['required'] : false;
-		$disabled = isset($params['disabled']) ? (boolean)$params['disabled'] : false;
-		$extra_html = isset($params['extra_html']) ? $params['extra_html'] : '';
-	}
-
 	/**
 	 * Render extra HTLM
 	 *
