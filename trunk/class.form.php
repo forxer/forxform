@@ -39,6 +39,32 @@ class form extends forxForm implements iRenderForxForm
 		$this->setRenderer('form');
 	}
 
+	public static function handleOptions($params,&$nid,&$name,&$id,&$label,&$value,&$default,&$desc,&$class,&$tabindex,&$required,&$disabled,&$extra_html)
+	{
+		$name = isset($params['name']) ? $params['name'] : '';
+		$id = isset($params['id']) ? $params['id'] : '';
+		$nid = array($name,$id);
+		$label = isset($params['label']) ? $params['label'] : '';
+		$value = isset($params['value']) ? $params['value'] : '';
+		$default = isset($params['default']) ? $params['default'] : '';
+		$desc = isset($params['desc']) ? $params['desc'] : '';
+		$class = isset($params['class']) ? $params['class'] : '';
+		$tabindex = isset($params['tabindex']) ? (integer)$params['tabindex'] : '';
+		$required = isset($params['required']) ? (boolean)$params['required'] : false;
+		$disabled = isset($params['disabled']) ? (boolean)$params['disabled'] : false;
+		$extra_html = isset($params['extra_html']) ? $params['extra_html'] : '';
+	}
+
+	/**
+	 * Render extra HTLM
+	 *
+	 * @return string
+	 */
+	public static function renderExtraHtml($str)
+	{
+		return $str;
+	}
+
 	/**
 	 * Render a group of hiddens fields
 	 *
@@ -61,8 +87,12 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderOpenFieldset($legend='')
+	public static function renderOpenFieldset($params=array())
 	{
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
+
+		$legend = isset($params['legend']) ? $params['legend'] : '';
+
 		$str = "\t".'<fieldset>'."\n";
 
 		if ($legend != '') {
@@ -77,7 +107,7 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderCloseFieldset()
+	public static function renderCloseFieldset($params=array())
 	{
 		return "\t".'</fieldset>'."\n";
 	}
@@ -87,9 +117,12 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderText($label, $nid, $size, $max, $default='', $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderText($params=array())
 	{
-		formField::getNameAndId($nid,&$name,&$id);
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
+
+		$size = isset($params['size']) ? (integer)$params['size'] : 50;
+		$max = isset($params['max']) ? (integer)$params['max'] : 255;
 
 		$str =
 		'<p><label for="'.$id.'">'.$label.'</label><br />'."\n".
@@ -104,9 +137,12 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderPassword($label, $nid, $size, $max, $default='', $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderPassword($params=array())
 	{
-		formField::getNameAndId($nid,&$name,&$id);
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
+
+		$size = isset($params['size']) ? (integer)$params['size'] : 50;
+		$max = isset($params['max']) ? (integer)$params['max'] : 255;
 
 		$str =
 		'<p><label for="'.$id.'">'.$label.'</label><br />'."\n".
@@ -121,9 +157,12 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderFile($label, $nid, $size, $max, $default='', $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderFile($params=array())
 	{
-		formField::getNameAndId($nid,&$name,&$id);
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
+
+		$size = isset($params['size']) ? (integer)$params['size'] : 50;
+		$max = isset($params['max']) ? (integer)$params['max'] : 255;
 
 		$str =
 		'<p><label for="'.$id.'">'.$label.'</label><br />'."\n".
@@ -138,9 +177,11 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderSelect($label, $nid, $data, $default='', $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderSelect($params=array())
 	{
-		formField::getNameAndId($nid,&$name,&$id);
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
+
+		$data = isset($params['data']) ? $params['data'] : array();
 
 		$str =
 		'<p><label for="'.$id.'">'.$label.'</label><br />'."\n".
@@ -150,9 +191,12 @@ class form extends forxForm implements iRenderForxForm
 		return $str;
 	}
 
-	public static function renderTextarea($label, $nid, $cols, $rows, $default='', $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderTextarea($params=array())
 	{
-		formField::getNameAndId($nid,&$name,&$id);
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
+
+		$cols = isset($params['size']) ? (integer)$params['size'] : 60;
+		$rows = isset($params['max']) ? (integer)$params['max'] : 10;
 
 		$str =
 		'<p><label for="'.$id.'">'.$label.'</label><br />'."\n".
@@ -167,13 +211,13 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderRadio($label, $nid, $value, $checked='', $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderRadio($params=array())
 	{
-		formField::getNameAndId($nid,&$name,&$id);
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
 
 		$str =
 		'<p>'.formField::radio($nid,$value,$checked,$class,$tabindex,$disabled,$extra_html).
-		'<label for="'.$id.'">'.$label.'</label>';
+		'<label for="'.$id.'">'.$label.'</label></p>';
 
 		return $str;
 	}
@@ -183,9 +227,9 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderCheckbox($label, $nid, $value, $checked='', $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderCheckbox($params=array())
 	{
-		formField::getNameAndId($nid,&$name,&$id);
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
 
 		$str =
 		'<p>'.formField::checkbox($nid,$value,$checked,$class,$tabindex,$disabled,$extra_html).
@@ -199,8 +243,14 @@ class form extends forxForm implements iRenderForxForm
 	 *
 	 * @return string
 	 */
-	public static function renderSubmit($nid, $value, $class='', $tabindex='', $disabled=false, $extra_html='')
+	public static function renderSubmit($params=array())
 	{
+		if (empty($param['nid'])) {
+			$param['nid'] = array('submit');
+		}
+
+		self::handleOptions($params,$nid,$name,$id,$label,$value,$default,$desc,$class,$tabindex,$required,$disabled,$extra_html);
+
 		return '<p>'.formField::submit($nid,$value,$class,$tabindex,$disabled,$extra_html).'</p>';
 	}
 
