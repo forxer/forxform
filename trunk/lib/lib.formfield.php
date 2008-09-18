@@ -31,7 +31,7 @@ class formField
 	 * @param string $name
 	 * @param string $id
 	 */
-	private static function getNameAndId($nid,&$name,&$id)
+	public static function getNameAndId($nid,&$name,&$id)
 	{
 		if (is_array($nid))
 		{
