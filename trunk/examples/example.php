@@ -3,7 +3,7 @@ require dirname(__FILE__).'/../lib/class.forxform.php';
 require dirname(__FILE__).'/../lib/interface.rendeforxform.php';
 require dirname(__FILE__).'/../lib/lib.formfield.php';
 
-require dirname(__FILE__).'/../class.form.php';
+require dirname(__FILE__).'/../renderer/class.form.php';
 
 $form = new form('example.php');
 $form
