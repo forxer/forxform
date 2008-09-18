@@ -10,13 +10,18 @@
 #
 # -- END LICENSE BLOCK ------------------------------------
 
+
+# Inclusion des fichiers requis
 require dirname(__FILE__).'/../lib/class.forxform.php';
 require dirname(__FILE__).'/../lib/interface.rendeforxform.php';
 require dirname(__FILE__).'/../lib/lib.formfield.php';
 
 require dirname(__FILE__).'/../renderer/class.form.php';
 
+# Instanciation d'un objet
 $form = new form('example.php');
+
+# Peuplement du formulaire
 $form
 	->openFieldset(array('legend'=>'Text fields'))
 		->text(array('label'=>'A text field','id'=>'f1'))
@@ -27,6 +32,7 @@ $form
 
 	->submit(array('value'=>'Send'));
 
+# Affichage
 echo $form->render();
 
 ?>
