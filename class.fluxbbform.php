@@ -35,6 +35,7 @@ class fluxbbForm extends forxForm implements iRenderForxForm
 	 * @param string $method
 	 * @param string $id
 	 * @param string $class
+	 * @return void
 	 */
 	public function __construct($action,$method='post',$id='',$class='frm-form')
 	{
@@ -273,7 +274,7 @@ class fluxbbForm extends forxForm implements iRenderForxForm
 			"\t\t\t".'<div class="txt-box textarea">'."\n".
 				"\t\t\t\t".'<label for="'.$id.'"><span>'.$label.'</span></label>'."\n".
 				"\t\t\t\t".'<div class="txt-input"><span class="fld-input">'.
-				formField::textarea($nid, $cols, $rows, $default='', $class='', $tabindex='', $disabled=false, $extra_html='').
+				formField::textarea($nid,$cols,$rows,$default,$class,$tabindex,$disabled,$extra_html).
 				'</span></div>'.
 			"\t\t\t".'</div>'."\n".
 		"\t\t".'</div>'."\n";
@@ -297,7 +298,7 @@ class fluxbbForm extends forxForm implements iRenderForxForm
 			$str =
 			"\t\t\t".'<div class="mf-item">'."\n".
 				"\t\t\t\t".'<span class="fld-input">'.
-					formField::radio($nid, $value, $checked='', $class='', $tabindex='', $disabled=false, $extra_html='').
+					formField::radio($nid,$value,$checked,$class,$tabindex,$disabled,$extra_html).
 					'</span>'.
 				"\t\t\t\t".'<label for="'.$id.'">'.$label.'</label>'."\n".
 			"\t\t\t".'</div>'."\n";
@@ -306,7 +307,7 @@ class fluxbbForm extends forxForm implements iRenderForxForm
 			"\t\t\t".'<div class="sf-set group-item7">'."\n".
 				"\t\t\t\t".'<div class="sf-box radio">'."\n".
 					"\t\t\t\t\t".'<span class="fld-input">'.
-					formField::radio($nid, $value, $checked='', $class='', $tabindex='', $disabled=false, $extra_html='').
+					formField::radio($nid,$value,$checked, $class, $tabindex, $disabled, $extra_html).
 					'</span>'."\n".
 					'<label for="'.$id.'"><span>'.$label.'</span>'.($desc != '' ? ' '.$desc : '').'</label>'."\n".
 				"\t\t\t\t".'</div>'."\n".
@@ -332,7 +333,7 @@ class fluxbbForm extends forxForm implements iRenderForxForm
 			$str =
 			"\t\t\t".'<div class="mf-item">'."\n".
 				"\t\t\t\t".'<span class="fld-input">'.
-					formField::checkbox($nid, $value, $checked='', $class='', $tabindex='', $disabled=false, $extra_html='').
+					formField::checkbox($nid,$value,$checked,$class,$tabindex,$disabled,$extra_html).
 					'</span>'.
 				"\t\t\t\t".'<label for="'.$id.'">'.$label.'</label>'."\n".
 			"\t\t\t".'</div>'."\n";
@@ -341,7 +342,7 @@ class fluxbbForm extends forxForm implements iRenderForxForm
 			"\t\t\t".'<div class="sf-set group-item7">'."\n".
 				"\t\t\t\t".'<div class="sf-box checkbox">'."\n".
 					"\t\t\t\t\t".'<span class="fld-input">'.
-					formField::checkbox($nid, $value, $checked='', $class='', $tabindex='', $disabled=false, $extra_html='').
+					formField::checkbox($nid,$value,$checked,$class,$tabindex,$disabled,$extra_html).
 					'</span>'."\n".
 					'<label for="'.$id.'"><span>'.$label.'</span>'.($desc != '' ? ' '.$desc : '').'</label>'."\n".
 				"\t\t\t\t".'</div>'."\n".
