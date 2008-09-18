@@ -23,14 +23,28 @@ $form = new form('example.php');
 
 # Peuplement du formulaire
 $form
+
+	# ouverture d'un fieldset
 	->openFieldset(array('legend'=>'Text fields'))
+
+		# ajout d'un champ texte
 		->text(array('label'=>'A text field','id'=>'f1'))
+
+		# ajout d'un autre champ texte
 		->text(array('label'=>'Another text field','id'=>'f2'))
+
+		# ajout d'un champs mot de passe
 		->password(array('label'=>'Password field','id'=>'f3'))
+
+		# ajout d'un champs fichier
 		->file(array('label'=>'File field','id'=>'f4'))
+
+	# fermeture du fieldset
 	->closeFieldset()
 
-	->submit(array('value'=>'Send'));
+	# bouton de soumission
+	->submit(array('value'=>'Send'))
+;
 
 # Affichage
 echo $form->render();
