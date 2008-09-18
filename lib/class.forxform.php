@@ -33,15 +33,14 @@ class forxForm
 
 	protected $renderer;
 
-	public function __construct($action,$method='post',$id='',$class='')
+	public function __construct($action,$method='post',$attributs=array())
 	{
 		$method = ($method == 'get' ? 'get' : 'post');
 
 		$this->form = array(
 			'action' => $action,
 			'method' => $method,
-			'id' => $id,
-			'class' => $class
+			'attributs' => $attributs
 		);
 	}
 
@@ -186,8 +185,13 @@ class forxForm
 		'<form action="'.$this->form['action'].'" method="'.$this->form['method'].'" accept-charset="utf-8"'.
 		(!empty($this->form['id']) ? ' id="'.$this->form['id'].'"' : '').
 		(!empty($this->form['class']) ? ' class="'.$this->form['class'].'"' : '').
-		($this->hasFile ? ' enctype="multipart/form-data"' : '').
-		'>'."\n";
+		($this->hasFile && !isset($this->form['attributs']['enctype']) ? ' enctype="multipart/form-data"' : '');
+
+		foreach ($this->form['attributs'] as $attribut=>$value) {
+			$form_string .= ' '.$attribut.'="'.$value.'"';
+		}
+
+		$form_string .= '>'."\n";
 
 		# hiddens fields
 		$form_string .= call_user_func(array($this->renderer,'renderHiddens'),$this->hiddens);
